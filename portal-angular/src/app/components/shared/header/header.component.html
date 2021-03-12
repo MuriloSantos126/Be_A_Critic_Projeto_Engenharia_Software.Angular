@@ -1,0 +1,40 @@
+<nav class="navbar navbar-default fixed-top navbar-expand-md navbar-dark">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" [routerLink]="'/'">Be A Critic</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ng-template [ngIf]="!isLogin">
+				<ul class="navbar-nav">
+					<li *ngIf="authToken === 'user'" class="nav-item" [ngClass]="{active: selectedItem === HeaderOptions.Feed}">
+						<a class="nav-link" [routerLink]="'/feed'">Feed</a>
+					</li>
+					<li class="nav-item" [ngClass]="{active: selectedItem === HeaderOptions.Filmes}">
+						<a class="nav-link" [routerLink]="'/filmes'">Filmes</a>
+					</li>
+					<li *ngIf="authToken === 'admin'" class="nav-item" [ngClass]="{active: selectedItem === HeaderOptions.Cadastro}">
+						<a class="nav-link" [routerLink]="'/cadastro'">Cadastro</a>
+					</li>
+				</ul>
+			</ng-template>
+		</div>
+		<ng-template [ngIf]="!isLogin">
+			<ul class="nav navbar-nav float-right">
+				<li class="nav-item active dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+					   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Logado como: {{ authToken }}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<!--<a class="dropdown-item dropdown-dark" [routerLink]="''">Meus detalhes</a>-->
+						<!--<div class="dropdown-divider"></div>-->
+						<a class="dropdown-item dropdown-exit" (click)="onSignOutClick()">Sair</a>
+					</div>
+				</li>
+			</ul>
+		</ng-template>
+	</div>
+</nav>
+<br>
+<br>
+<br>

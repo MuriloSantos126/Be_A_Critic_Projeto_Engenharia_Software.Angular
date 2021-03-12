@@ -1,0 +1,36 @@
+<app-page>
+	<ul class="row">
+		<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<ng-template [ngIf]="isRequesting" [ngIfElse]="requestResult">
+				<h6>Carregando...</h6>
+			</ng-template>
+			<ng-template #requestResult>
+				<ng-template [ngIf]="requestError === null" [ngIfElse]="showError">
+					<span>
+						<p class="h5 card-title" style="display: inline">{{ user.name }} </p>
+						<small>(RA: {{ user.username }})</small>
+					</span>
+
+					<div [ngSwitch]="user.type">
+						<div *ngSwitchCase="'A'">
+							<small>Aluno</small>
+							<br>
+							<small>{{ user.term }}o. semestre</small>
+							 -
+							<small> {{ user.graduation }}</small>
+						</div>
+						<small *ngSwitchCase="'P'">
+							Professor
+						</small>
+						<small *ngSwitchCase="'V'">
+							Visitante
+						</small>
+					</div>
+				</ng-template>
+				<ng-template #showError>
+					{{ requestError }}
+				</ng-template>
+			</ng-template>
+		</li>
+	</ul>
+</app-page>

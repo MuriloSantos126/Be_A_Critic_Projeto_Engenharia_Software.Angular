@@ -1,0 +1,29 @@
+<app-page [navSelectedItem]="HeaderOptions.Feed">
+	<ul class="row">
+		<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<p class="h5 card-title">Feed</p>
+		</li>
+		<ng-template [ngIf]="!hasReviews" [ngIfElse]="reviewsList">
+			<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<h6>
+					Não há avaliações registradas.
+				</h6>
+			</li>
+		</ng-template>
+		<ng-template #reviewsList>
+			<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+				*ngFor="let movie of moviesWithReviews">
+
+				<h6 style="display: inline">{{ user }}</h6> fez nova avaliação.
+				<small style="display: inline; float: right">{{ movie.reviewDate | datetime }}</small>
+				<hr>
+				<img alt="Capa do filme" style="width: 150px; height: 150px" [src]="movie.image">
+				<br>
+				<br>
+				<span>
+					<a href="#">{{ movie.name }}</a> avaliado como <h6 style="display: inline">{{ movie.review | review }}</h6>
+				</span>
+			</li>
+		</ng-template>
+	</ul>
+</app-page>

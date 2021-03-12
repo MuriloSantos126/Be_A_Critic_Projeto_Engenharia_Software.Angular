@@ -1,0 +1,53 @@
+<app-page [navSelectedItem]="HeaderOptions.Filmes">
+	<ul class="row">
+		<!--<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3">-->
+			<!--<span class="card-title">-->
+				<!--<p class="h5" style="display: inline">-->
+					  <!--Total-->
+					  <!--<small> (horas)</small>-->
+				<!--</p>-->
+				<!--<h5 class="float-right">-->
+					  <!--{{ getTotalHours(extracurriculars) }}-->
+						<!--<small>/120</small>-->
+				<!--</h5>-->
+			<!--</span>-->
+		<!--</li>-->
+		<ng-template [ngIf]="programas.length === 0" [ngIfElse]="moviesLIst">
+			<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<h6>
+					Não há programas registrados.
+				</h6>
+			</li>
+		</ng-template>
+		<ng-template #moviesLIst>
+			<li class="list-group-item col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+				*ngFor="let movie of programas; let index = index">
+				<img alt="Capa do filme" style="width: 150px; height: 150px" [src]="movie.image">
+				<hr>
+				<a href="#">{{ movie.name }}</a> ({{ movie.isMovie ? "Filme" : "Seriado" }} em {{ movie.language }})
+				<br>
+				<small> Lançado em: ({{ movie.releaseDate }})</small>
+				<ng-template [ngIf]="usuario === 'user'">
+					<hr>
+					<label for="input-review">
+						<small>Minha avaliação</small>
+					</label>
+					<br>
+					<div class="container">
+						<div class="row">
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">Não vi</p></div>
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">1</p></div>
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">2</p></div>
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">3</p></div>
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">4</p></div>
+							<div class="col" style="padding: 0; margin: 0"><p style="text-align: center">5</p></div>
+						</div>
+					</div>
+					<div style="margin-left: 30px; margin-right: 30px">
+						<input type="range" id="input-review" min="0" max="5" step="1" (change)="onReviewChanged(movie)" [(ngModel)]="movie.review"/>
+					</div>
+				</ng-template>
+			</li>
+		</ng-template>
+	</ul>
+</app-page>
